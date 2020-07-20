@@ -29,6 +29,17 @@ So we create an ad-hoc table definition, and once the data is loaded we then tra
 1. ```INTERVAL``` data type, which is a postgres' type for `duration` values
 1. ```DATATYPE expr``` decorated literal expression to interpret expression as a value of particular type in arbitrary expressions; particularly useful in time expressions like ```DATE '2017-02-01' + INTERVAL '1 month'```
 1. first day of a month + 1 month yields the first day of the next month
+1. ```dbname=db application_name=app``` connection string to open network connection to particular db on PostgreSQL server as a particular application
+1. ```CAST(val AS DATATYPE)``` function to transform value to particular data type
+1. ```COALESCE(val, ...)``` expression to select the first of the arguments that is not `NULL`
+1. ```GENERATE_SERIES(start, end, step)``` set returning function to generate a series of values from start to end with a step size of step and return them as a anonymous table
+1. ```GENERATE_SERIES()``` function and ```BETWEEN``` operator are inclusive, that is upper bound `end` is included in the result set
+1. ```table_expr AS table(col, ...)```
+1. SQL standard supports ```/* */``` C-style block comment syntax
 
 ### Open questions
 1. What is the difference between ```val::DATATYPE``` and ```DATATYPE val``` explicit type decoration syntaxes? Seems to work 100% identical in my queries...
+1. When to use `CAST(val AS TYPE)` vs type annotation vs type decoration?
+1. Port python code to Go
+1. Examine docs for Go PostgreSQL driver (in particular, how to send SQL query parameters separately from the main SQL query text)
+1. Benchmark app code vs sql script
