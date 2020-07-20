@@ -15,5 +15,20 @@ So we create an ad-hoc table definition, and once the data is loaded we then tra
 1. ```ALTER col USING expr``` to simultaneously migrate table data while migrating table scheme
 1. ```REPLACE(val, old, new)``` text function
 1. ```SUBSTRING(val FROM idx)``` text function
-1. ```val::DATATYPE``` explicit type annotation
-1. ```E'\esc-seq'``` escape sequence character literal
+1. ```val::DATATYPE``` explicit type annotation to interpret literal as a value of particular type in arbitrary expressions
+1. ```E'\esc-seq'``` escape sequence literal
+
+## Exercise 2: List the factbook entries for February
+
+### Learned techniques
+1. ```\set name value``` psql meta-comand to declare client-scoped variables
+1. ```:'var'``` expression to resolve value of a variable previously declared with `\set var val`
+1. ```TO_CHAR(val, 'FORMATTING_TEMPLATE')``` function to format arbitrary values to text representation according to a given template
+1. ```'G'``` locale-dependent group separator formatting template pattern, like decimal numbers group separator, like ```'999G99'``` may be `1000,00` or `1000.00` depending on locale
+1. ```'L'``` locale-dependent currency symbol formatting template pattern, like ```'L9999'``` may be `$1000`
+1. ```INTERVAL``` data type, which is a postgres' type for `duration` values
+1. ```DATATYPE expr``` decorated literal expression to interpret expression as a value of particular type in arbitrary expressions; particularly useful in time expressions like ```DATE '2017-02-01' + INTERVAL '1 month'```
+1. first day of a month + 1 month yields the first day of the next month
+
+### Open questions
+1. What is the difference between ```val::DATATYPE``` and ```DATATYPE val``` explicit type decoration syntaxes? Seems to work 100% identical in my queries...
